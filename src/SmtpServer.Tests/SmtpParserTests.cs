@@ -261,58 +261,6 @@ namespace SmtpServer.Tests
         }
 
         [Fact]
-        public void CanMakeProxyUnknown()
-        {
-            // arrange
-            var reader = CreateReader("PROXY UNKNOWN");
-
-            // act
-            var result = Parser.TryMakeProxy(ref reader, out var command, out var errorResponse);
-
-            // assert
-            Assert.True(result);
-            Assert.True(command is ProxyCommand);
-            Assert.Null(((ProxyCommand)command).SourceEndpoint);
-            Assert.Null(((ProxyCommand)command).DestinationEndpoint);
-        }
-
-        [Fact]
-        public void CanMakeProxyTcp4()
-        {
-            // arrange
-            var reader = CreateReader("PROXY TCP4 192.168.1.1 192.168.1.2 1234 16789");
-
-            // act
-            var result = Parser.TryMakeProxy(ref reader, out var command, out var errorResponse);
-
-            // assert
-            Assert.True(result);
-            Assert.True(command is ProxyCommand);
-            Assert.Equal("192.168.1.1", ((ProxyCommand)command).SourceEndpoint.Address.ToString());
-            Assert.Equal("192.168.1.2", ((ProxyCommand)command).DestinationEndpoint.Address.ToString());
-            Assert.Equal(1234, ((ProxyCommand)command).SourceEndpoint.Port);
-            Assert.Equal(16789, ((ProxyCommand)command).DestinationEndpoint.Port);
-        }
-
-        [Fact]
-        public void CanMakeProxyTcp6()
-        {
-            // arrange
-            var reader = CreateReader("PROXY TCP6 2001:1234:abcd::0001 3456:2e76:66d8:f84:abcd:abef:ffff:1234 1234 16789");
-
-            // act
-            var result = Parser.TryMakeProxy(ref reader, out var command, out var errorResponse);
-
-            // assert
-            Assert.True(result);
-            Assert.True(command is ProxyCommand);
-            Assert.Equal(IPAddress.Parse("2001:1234:abcd::0001").ToString(), ((ProxyCommand)command).SourceEndpoint.Address.ToString());
-            Assert.Equal(IPAddress.Parse("3456:2e76:66d8:f84:abcd:abef:ffff:1234").ToString(), ((ProxyCommand)command).DestinationEndpoint.Address.ToString());
-            Assert.Equal(1234, ((ProxyCommand)command).SourceEndpoint.Port);
-            Assert.Equal(16789, ((ProxyCommand)command).DestinationEndpoint.Port);
-        }
-
-        [Fact]
         public void CanMakeAtom()
         {
             // arrange

@@ -14,7 +14,6 @@ namespace SmtpServer.StateMachine
                 { NoopCommand.Command },
                 { RsetCommand.Command },
                 { QuitCommand.Command },
-                { ProxyCommand.Command },
                 { HeloCommand.Command, WaitingForMailSecureWhenSecure },
                 { EhloCommand.Command, WaitingForMailSecureWhenSecure }
             },

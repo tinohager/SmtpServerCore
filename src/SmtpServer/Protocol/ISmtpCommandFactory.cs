@@ -75,13 +75,5 @@ namespace SmtpServer.Protocol
         /// <param name="parameter">The authentication parameter.</param>
         /// <returns>The AUTH command.</returns>
         SmtpCommand CreateAuth(AuthenticationMethod method, string parameter);
-
-        /// <summary>
-        /// Create a PROXY command.
-        /// </summary>
-        /// <param name="sourceEndpoint">The source endpoint.</param>
-        /// <param name="destinationEndpoint">The destination endpoint.</param>
-        /// <returns>The PROXY command.</returns>
-        SmtpCommand CreateProxy(IPEndPoint sourceEndpoint = null, IPEndPoint destinationEndpoint = null);
     }
 }

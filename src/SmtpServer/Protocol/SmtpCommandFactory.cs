@@ -68,11 +68,5 @@ namespace SmtpServer.Protocol
         {
             return new AuthCommand(method, parameter);
         }
-
-        /// <inheritdoc />
-        public virtual SmtpCommand CreateProxy(IPEndPoint sourceEndpoint, IPEndPoint destinationEndpoint)
-        {
-            return new ProxyCommand(sourceEndpoint, destinationEndpoint);
-        }
     }
 }
