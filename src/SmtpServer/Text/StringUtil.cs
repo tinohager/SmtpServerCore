@@ -52,12 +52,9 @@ namespace SmtpServer.Text
             return Create(ref buffer, Encoding.ASCII);
         }
 
-        internal static unsafe string Create(ref ReadOnlySpan<byte> buffer, Encoding encoding)
+        internal static string Create(ref ReadOnlySpan<byte> buffer, Encoding encoding)
         {
-            fixed (byte* ptr = buffer)
-            {
-                return encoding.GetString(ptr, buffer.Length);
-            }
+            return encoding.GetString(buffer);
         }
     }
 }

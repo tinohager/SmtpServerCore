@@ -33,27 +33,21 @@ namespace SmtpServer.IO
         /// <param name="writer">The writer to perform the operation on.</param>
         /// <param name="encoding">The encoding to use for the text.</param>
         /// <param name="text">The text to write to the writer.</param>
-        static unsafe void WriteLine(this PipeWriter writer, Encoding encoding, string text)
+        static void WriteLine(this PipeWriter writer, Encoding encoding, string text)
         {
             if (writer == null)
             {
                 throw new ArgumentNullException(nameof(writer));
             }
 
-            fixed (char* ptr = text)
-            {
-                var count = encoding.GetByteCount(ptr, text.Length);
+            int byteCount = encoding.GetByteCount(text);
+            Span<byte> span = writer.GetSpan(byteCount + 2);
+            int bytesWritten = encoding.GetBytes(text, span);
 
-                fixed (byte* b = writer.GetSpan(count + 2))
-                {
-                    encoding.GetBytes(ptr, text.Length, b, count);
+            span[bytesWritten] = 13;     // CR
+            span[bytesWritten + 1] = 10; // LF
 
-                    b[count + 0] = 13;
-                    b[count + 1] = 10;
-                }
-
-                writer.Advance(count + 2);
-            }
+            writer.Advance(bytesWritten + 2);
         }
 
         /// <summary>

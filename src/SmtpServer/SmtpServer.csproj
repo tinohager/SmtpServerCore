@@ -2,29 +2,21 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;net10.0</TargetFrameworks>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>latest</LangVersion>
     <AssemblyName>SmtpServer</AssemblyName>
     <RootNamespace>SmtpServer</RootNamespace>
     <Version>10.0.1</Version>
     <Description>High-performance, flexible SMTP server implementation for .NET with support for ESMTP, TLS, authentication, and custom message handling.</Description>
-    <Authors>Cain O'Sullivan</Authors>
-    <Copyright>2015-2023</Copyright>
-    <RepositoryUrl>https://github.com/cosullivan/SmtpServer</RepositoryUrl>
-    <PackageProjectUrl>http://cainosullivan.com/smtpserver</PackageProjectUrl>
+    <Authors>Cain O'Sullivan; Tino Hager</Authors>
+    <Copyright>2015-2026</Copyright>
+    <RepositoryUrl>https://github.com/tinohager/SmtpServer</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/tinohager/SmtpServer</PackageProjectUrl>
     <PackageTags>smtp smtpserver mailserver</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>A changelog is available at https://github.com/cosullivan/SmtpServer/blob/master/CHANGELOG.md</PackageReleaseNotes>
+    <PackageReleaseNotes>A changelog is available at https://github.com/tinohager/SmtpServer/blob/master/CHANGELOG.md</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
