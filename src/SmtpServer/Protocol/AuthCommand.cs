@@ -2,6 +2,7 @@
 using SmtpServer.ComponentModel;
 using SmtpServer.IO;
 using System;
+using System.IO;
 using System.IO.Pipelines;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -44,6 +45,12 @@ namespace SmtpServer.Protocol
         internal override async Task<bool> ExecuteAsync(SmtpSessionContext context, CancellationToken cancellationToken)
         {
             context.Authentication = AuthenticationContext.Unauthenticated;
+
+            if (context.ServiceProvider.GetService(typeof(IUserAuthenticatorFactory)) == null)
+            {
+                await context.Pipe.Output.WriteReplyAsync(SmtpResponse.CommandNotImplemented, cancellationToken).ConfigureAwait(false);
+                return false;
+            }
 
             switch (Method)
             {
@@ -125,7 +132,7 @@ namespace SmtpServer.Protocol
         /// <returns>true if the user name and password were extracted from the base64 encoded string, false if not.</returns>
         bool TryExtractFromBase64(string base64)
         {
-            var match = Regex.Match(Encoding.UTF8.GetString(Convert.FromBase64String(base64)), "\x0000(?<user>.*)\x0000(?<password>.*)");
+            var match = Regex.Match(DecodeBase64(base64), "\x0000(?<user>.*)\x0000(?<password>.*)");
 
             if (match.Success == false)
             {
@@ -148,7 +155,7 @@ namespace SmtpServer.Protocol
         {
             if (string.IsNullOrWhiteSpace(Parameter) == false)
             {
-                _user = Encoding.UTF8.GetString(Convert.FromBase64String(Parameter));
+                _user = DecodeBase64(Parameter);
             }
             else
             {
@@ -177,7 +184,25 @@ namespace SmtpServer.Protocol
         {
             var text = await reader.ReadLineAsync(maxMessageSizeOptions, cancellationToken);
 
-            return text == null ? string.Empty : Encoding.UTF8.GetString(Convert.FromBase64String(text));
+            return text == null ? string.Empty : DecodeBase64(text);
+        }
+
+        static string DecodeBase64(string parameter)
+        {
+            if (string.IsNullOrEmpty(parameter)) return string.Empty;
+
+            // Allocate memory on the stack for performance
+            // Max size required is approximately 3/4 the length of the Base64 string
+            Span<byte> buffer = stackalloc byte[parameter.Length];
+
+            if (Convert.TryFromBase64String(parameter, buffer, out int bytesWritten))
+            {
+                // Success: Only decode the portion that was actually written
+                return Encoding.UTF8.GetString(buffer.Slice(0, bytesWritten));
+            }
+
+            // Handle the failure gracefully without an exception
+            return string.Empty;
         }
 
         /// <summary>

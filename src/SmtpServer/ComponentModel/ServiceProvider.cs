@@ -27,6 +27,13 @@ namespace SmtpServer.ComponentModel
         /// </summary>
         public ServiceProvider()
         {
+        }
+
+        /// <summary>
+        /// Add Defaults for UserAuthenticator, MailboxFilter and MessageStore
+        /// </summary>
+        public void AddDefaults()
+        {
             Add(UserAuthenticator.Default);
             Add(MailboxFilter.Default);
             Add(MessageStore.Default);
@@ -136,7 +143,7 @@ namespace SmtpServer.ComponentModel
                 return _messageStoreFactory;
             }
 
-            throw new NotSupportedException(serviceType.ToString());
+            return null;
         }
     }
 }

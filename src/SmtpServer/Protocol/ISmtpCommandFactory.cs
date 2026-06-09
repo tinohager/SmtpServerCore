@@ -1,6 +1,5 @@
 ﻿using SmtpServer.Mail;
 using System.Collections.Generic;
-using System.Net;
 
 namespace SmtpServer.Protocol
 {

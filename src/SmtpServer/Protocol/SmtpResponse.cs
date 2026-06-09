@@ -36,6 +36,11 @@
         public static readonly SmtpResponse SyntaxError = new SmtpResponse(SmtpReplyCode.SyntaxError, "syntax error");
 
         /// <summary>
+        /// 502 CommandNotImplemented
+        /// </summary>
+        public static readonly SmtpResponse CommandNotImplemented = new SmtpResponse(SmtpReplyCode.CommandNotImplemented, "command not implemented");
+
+        /// <summary>
         /// 552 SizeLimitExceeded
         /// </summary>
         public static readonly SmtpResponse SizeLimitExceeded = new SmtpResponse(SmtpReplyCode.SizeLimitExceeded, "size limit exceeded");
