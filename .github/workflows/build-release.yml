@@ -29,7 +29,7 @@ jobs:
     - name: Change Package Version
       working-directory: ./src
       run: |
-        sed -i -e "s/<Version>[a-zA-Z0-9.-]*<\/Version>/<Version>${{ steps.tag.outputs.result }}<\/Version>/g" SmtpServer/SmtpServer.csproj
+        sed -i -e "s/<Version>[a-zA-Z0-9.-]*<\/Version>/<Version>${{ steps.tag.outputs.result }}<\/Version>/g" Nager.SmtpServerCore/Nager.SmtpServerCore.csproj
     - name: Restore dependencies
       working-directory: ./src
       run: dotnet restore
@@ -42,7 +42,7 @@ jobs:
         dotnet test --configuration Release --no-restore --no-build --verbosity normal
     - name: Build project and generate NuGet package
       run: |
-        dotnet pack --configuration Release --output $GITHUB_WORKSPACE/out src/SmtpServer/SmtpServer.csproj
+        dotnet pack --configuration Release --output $GITHUB_WORKSPACE/out src/Nager.SmtpServerCore/Nager.SmtpServerCore.csproj
     - name: NuGet login
       uses: NuGet/login@v1
       id: login
