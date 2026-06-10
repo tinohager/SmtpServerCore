@@ -23,9 +23,9 @@ SmtpServer currently supports the following extensions:
 
 ## Installation
 
-The package is available on [NuGet](https://www.nuget.org/packages/SmtpServer)
+The package is available on [NuGet](https://www.nuget.org/packages/SmtpServerCore)
 ```powershell
-PM> install-package SmtpServer
+PM> install-package SmtpServerCore
 ```
 
 ## 🚀 Getting Started
