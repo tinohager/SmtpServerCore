@@ -1,14 +1,14 @@
-# What is SmtpServerCore?
+# What is Nager.SmtpServerCore?
 
-**SmtpServerCore** is a lightweight yet powerful SMTP server implementation in C#.  
+**Nager.SmtpServerCore** is a lightweight yet powerful SMTP server implementation in C#.  
 Built entirely in .NET, it leverages the Task Parallel Library (TPL) for maximum performance.
 
 ## Origin & Development
-**SmtpServerCore** is based on the original [SmtpServer library by cosullivan](https://github.com/cosullivan/SmtpServer). This repository represents an independent continuation and further development of the project, focusing on modern .NET standards and long-term maintainability.
+**Nager.SmtpServerCore** is based on the original [SmtpServer library by cosullivan](https://github.com/cosullivan/SmtpServer). This repository represents an independent continuation and further development of the project, focusing on modern .NET standards and long-term maintainability.
 
 ## 🆕 What's New?
 
-Check the [Changelog](https://github.com/tinohager/SmtpServerCore/blob/main/CHANGELOG.md)
+Check the [Changelog](https://github.com/nager/Nager.SmtpServerCore/blob/main/CHANGELOG.md)
 
 ## ⚡ Supported ESMTP Extensions
 
@@ -23,9 +23,9 @@ SmtpServer currently supports the following extensions:
 
 ## Installation
 
-The package is available on [NuGet](https://www.nuget.org/packages/SmtpServerCore)
+The package is available on [NuGet](https://www.nuget.org/packages/Nager.SmtpServerCore)
 ```powershell
-PM> install-package SmtpServerCore
+PM> install-package Nager.SmtpServerCore
 ```
 
 ## 🚀 Getting Started
