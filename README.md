@@ -8,7 +8,7 @@ Built entirely in .NET, it leverages the Task Parallel Library (TPL) for maximum
 
 ## 🆕 What's New?
 
-Check the [Changelog](https://github.com/tinohager/SmtpServerCore/blob/master/CHANGELOG.md)
+Check the [Changelog](https://github.com/tinohager/SmtpServerCore/blob/main/CHANGELOG.md)
 
 ## ⚡ Supported ESMTP Extensions
 
